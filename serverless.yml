@@ -1,0 +1,27 @@
+
+service: aws-datadog-python37
+
+useDotenv: true
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-plugin-datadog
+provider:
+  name: aws
+  runtime: python3.7
+  region: us-east-1
+
+custom:
+  datadog:
+    addExtension: true
+    apiKey: ${env:DATADOG_API_KEY}
+    enableXrayTracing: true
+    encodeAuthorizerContext: true
+
+functions:
+  failing:
+    handler: failing.handler
+
+  working:
+    handler: working.handler
